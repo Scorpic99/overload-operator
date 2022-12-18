@@ -17,21 +17,21 @@ public:
 
 		cout << numerator_ << "/" << denominator_ << endl;
 	}
-	Fraction operator+(Fraction& r_op) {
+	Fraction operator+(Fraction r_op) {
 		int r_op1 = denominator_ * r_op.denominator_;//знаменатель
 		int l_numerator = numerator_ * r_op.denominator_;
 		int r_numerator = r_op.numerator_ * denominator_;
 		int l_op1 = l_numerator + r_numerator;
 		return Fraction(l_op1, r_op1);
 	}
-	Fraction operator-(Fraction& r_op) {
+	Fraction operator-(Fraction r_op) {
 		int r_op1 = denominator_ * r_op.denominator_;//знаменатель
 		int l_numerator = numerator_ * r_op.denominator_;
 		int r_numerator = r_op.numerator_ * denominator_;
 		int l_op1 = l_numerator - r_numerator;
 		return Fraction(l_op1, r_op1);
 	}
-	Fraction operator*(Fraction& r_op) {
+	Fraction operator*(Fraction r_op) {
 		int l_op1 = numerator_ * r_op.numerator_;
 		int r_op1 = denominator_ * r_op.denominator_;//знаменатель
 		if (denominator_ == r_op.numerator_) {
@@ -44,7 +44,7 @@ public:
 		}
 		return Fraction(l_op1, r_op1);
 	}
-	Fraction operator/(Fraction& r_op) {
+	Fraction operator/(Fraction r_op) {
 
 		int l_op1 = numerator_ * r_op.denominator_;
 		int r_op1 = denominator_ * r_op.numerator_;//знаменатель
@@ -58,26 +58,25 @@ public:
 		}
 		return Fraction(l_op1, r_op1);
 	}
-	Fraction& operator++() {
-		++numerator_;
-		++denominator_;
-		return *this;
+	Fraction operator++() {
+		int l_op1 = numerator_ + denominator_;
+		return Fraction(l_op1, denominator_);
+
 	}
-	Fraction& operator--() {
-		--numerator_;
-		--denominator_;
-		return *this;
+	Fraction operator--() {
+		int l_op1 = numerator_ - denominator_;
+		return Fraction(l_op1, denominator_);
 	}	
 	Fraction& operator++(int) {
 		Fraction temp(*this);
-		++numerator_;
-		++denominator_;
+		int l_op1 = numerator_ + denominator_;
+		Fraction(l_op1, denominator_);
 		return temp;
 	}
 	Fraction& operator--(int) {
 		Fraction temp(*this);
-		--numerator_;
-		--denominator_;
+		int l_op1 = numerator_ - denominator_;
+		Fraction(l_op1, denominator_);
 		return temp;
 	}
 	Fraction operator-();
@@ -115,6 +114,8 @@ int main()
 	f3 = ++f1 * f2;
 	f3.print();
 	f3 = f1++ / f2;
+	f3.print();
+	f3 = ++f1;
 	f3.print();
 
 	return 0;
