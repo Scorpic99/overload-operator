@@ -60,22 +60,26 @@ public:
 	}
 	Fraction operator++() {
 		int l_op1 = numerator_ + denominator_;
+		this->numerator_ = l_op1;
 		return Fraction(l_op1, denominator_);
 
 	}
 	Fraction operator--() {
 		int l_op1 = numerator_ - denominator_;
+		this->numerator_ = l_op1;
 		return Fraction(l_op1, denominator_);
 	}	
-	Fraction& operator++(int) {
+	Fraction operator++(int) {
 		Fraction temp(*this);
 		int l_op1 = numerator_ + denominator_;
+		this->numerator_ = l_op1;
 		Fraction(l_op1, denominator_);
 		return temp;
 	}
 	Fraction& operator--(int) {
 		Fraction temp(*this);
 		int l_op1 = numerator_ - denominator_;
+		this->numerator_ = l_op1;
 		Fraction(l_op1, denominator_);
 		return temp;
 	}
@@ -91,7 +95,7 @@ Fraction Fraction::operator-() {
 int main()
 {
 	setlocale(LC_ALL,"Rus");
-	int num_num1 = 0, num_den1 = 0, num_num2 = 0, num_den2 = 0;	
+	int num_num1 = 3, num_den1 = 7, num_num2 = 3, num_den2 = 7;	
 	cout << "Введите числитель дроби 1: " << endl;
 	cin >> num_num1;
 	cout << "Введите числитель дроби 2: " << endl;
@@ -115,8 +119,34 @@ int main()
 	f3.print();
 	f3 = f1++ / f2;
 	f3.print();
+	f3 = f1;
+	f3.print();
 	f3 = ++f1;
 	f3.print();
+	cout << "------------------------------" << endl;
+
+	Fraction x(2, 3);
+	auto fx = x++;
+	fx.print();
+	x.print();
+	cout << "------------------------------" << endl;
+
+	x = Fraction(2, 3);
+	fx = ++x;
+	fx.print();
+	x.print();
+	cout << "------------------------------" << endl;
+
+	x = Fraction(2, 3);
+	fx = --x;
+	fx.print();
+	x.print();
+	cout << "------------------------------" << endl;
+
+	x = Fraction(2, 3);
+	fx = x--;
+	fx.print();
+	x.print();
 
 	return 0;
 }
